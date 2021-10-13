@@ -2,22 +2,26 @@ import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
 
+const stateInitial = {
+  cardName: '',
+  cardDescription: '',
+  cardAttr1: '0',
+  cardAttr2: '0',
+  cardAttr3: '0',
+  cardImage: '',
+  cardRare: 'normal',
+  cardTrunfo: false,
+  cards: [],
+  // hasTrunfo: '',
+};
+
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
-      cardImage: '',
-      cardRare: '',
-      cardTrunfo: false,
-      // hasTrunfo: '',
-    };
+    this.state = stateInitial;
     this.onInputChange = this.onInputChange.bind(this);
     this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   onInputChange({ target }) {
@@ -31,7 +35,31 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
-    console.log('salve');
+    const {
+      cards,
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRareormal,
+      cardTrunfo,
+    } = this.state;
+    const newCard = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRareormal,
+      cardTrunfo };
+    cards.push(newCard);
+    this.setState(stateInitial);
+    this.setState({
+      cards,
+    });
   }
 
   isSaveButtonDisabled() {
