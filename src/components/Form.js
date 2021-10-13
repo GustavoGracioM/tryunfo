@@ -17,6 +17,7 @@ class Form extends React.Component {
       onInputChange,
       onSaveButtonClick,
     } = this.props;
+
     return (
       <form>
         <label htmlFor="name-input">
@@ -103,7 +104,7 @@ class Form extends React.Component {
         </label>
         <button
           type="submit"
-          disabled={ isSaveButtonDisabled }
+          disabled={ isSaveButtonDisabled() }
           onClick={ onSaveButtonClick }
           data-testid="save-button"
         >

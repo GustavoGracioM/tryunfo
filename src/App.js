@@ -13,10 +13,11 @@ class App extends React.Component {
       cardAttr3: '',
       cardImage: '',
       cardRare: '',
-      cardTrunfo: true,
+      cardTrunfo: false,
       // hasTrunfo: '',
     };
     this.onInputChange = this.onInputChange.bind(this);
+    this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
   }
 
   onInputChange({ target }) {
@@ -34,7 +35,24 @@ class App extends React.Component {
   }
 
   isSaveButtonDisabled() {
-    console.log('is');
+    const { cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3 } = this.state;
+    const maxValue = 90;
+    const valueTotal = 210;
+
+    const array = [cardName, cardDescription, cardImage, cardRare];
+    const result = array.some((card) => card.length < 1);
+
+    const att = [parseFloat(cardAttr1), parseFloat(cardAttr2), parseFloat(cardAttr3)];
+    const sum = att.reduce((acc, curr) => acc + curr);
+    const result1 = att.every((num) => num <= maxValue && num >= 0 && sum <= valueTotal);
+    if (!result && result1) return false;
+    return true;
   }
 
   render() {
