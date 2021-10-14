@@ -9,7 +9,7 @@ const stateInitial = {
   cardAttr2: '0',
   cardAttr3: '0',
   cardImage: '',
-  cardRare: 'raro',
+  cardRare: 'normal',
   cardTrunfo: false,
   cards: [],
   hasTrunfo: false,
