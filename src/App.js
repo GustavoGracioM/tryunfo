@@ -22,6 +22,7 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   onInputChange({ target }) {
@@ -86,6 +87,16 @@ class App extends React.Component {
     return true;
   }
 
+  deleteCard(cardN) {
+    const { cards } = this.state;
+    const test = cards.find((card) => card.cardName === cardN);
+    if (test.cardTrunfo) {
+      this.setState({ hasTrunfo: false });
+    }
+    cards.splice(test, 1);
+    this.setState({ cards });
+  }
+
   render() {
     const {
       cardName,
@@ -127,17 +138,25 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         {cards && cards.map((card) => (
-          <Card
-            key={ card.cardName }
-            cardName={ card.cardName }
-            cardDescription={ card.cardDescription }
-            cardAttr1={ card.cardAttr1 }
-            cardAttr2={ card.cardAttr2 }
-            cardAttr3={ card.cardAttr3 }
-            cardImage={ card.cardImage }
-            cardRare={ card.cardRare }
-            cardTrunfo={ card.cardTrunfo }
-          />
+          <div key={ card.cardName }>
+            <Card
+              cardName={ card.cardName }
+              cardDescription={ card.cardDescription }
+              cardAttr1={ card.cardAttr1 }
+              cardAttr2={ card.cardAttr2 }
+              cardAttr3={ card.cardAttr3 }
+              cardImage={ card.cardImage }
+              cardRare={ card.cardRare }
+              cardTrunfo={ card.cardTrunfo }
+            />
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={ () => this.deleteCard(card.cardName) }
+            >
+              Excluir
+            </button>
+          </div>
         ))}
       </div>
     );
