@@ -14,16 +14,46 @@ class Card extends React.Component {
       cardTrunfo,
     } = this.props;
     return (
-      <div>
+      <div className="card boder-card">
         <h2 data-testid="name-card">{ cardName }</h2>
         <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-        <h3 data-testid="description-card">{ cardDescription }</h3>
-        <p data-testid="attr1-card">{ cardAttr1 }</p>
-        <p data-testid="attr2-card">{ cardAttr2 }</p>
-        <p data-testid="attr3-card">{ cardAttr3 }</p>
-        <h3 data-testid="rare-card">{ cardRare }</h3>
-        {cardTrunfo && (<h3 data-testid="trunfo-card">Super Trunfo</h3>) }
+        <h4
+          data-testid="description-card"
+          className="description-card"
+        >
+          { cardDescription }
+        </h4>
+        <div className="attrs">
+          <p data-testid="attr1-card fw-bold">
+            Attr01...............................
+            <span className="attr-color">{ cardAttr1 }</span>
+          </p>
+          <p data-testid="attr2-card fw-bold">
+            Attr02...............................
+            <span className="attr-color">{ cardAttr2 }</span>
+          </p>
+          <p data-testid="attr3-card fw-bold">
+            Attr03...............................
+            <span className="attr-color">{ cardAttr3 }</span>
+          </p>
+        </div>
+        <div className="card-rare">
+          <h3
+            data-testid="rare-card"
+          >
+            { cardRare[0].toUpperCase() + cardRare.substr(1) }
+          </h3>
+          {cardTrunfo && (
+            <h3
+              data-testid="trunfo-card"
+              className="super-trunfo"
+            >
+              Super Trunfo
+            </h3>
+          ) }
+        </div>
       </div>
+
     );
   }
 }

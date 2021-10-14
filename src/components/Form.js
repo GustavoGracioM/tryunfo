@@ -20,9 +20,10 @@ class Form extends React.Component {
 
     return (
       <form>
-        <label htmlFor="name-input">
+        <label className="form-label fw-bold" htmlFor="name-input">
           Nome:
           <input
+            className="form-control"
             name="cardName"
             value={ cardName }
             onChange={ onInputChange }
@@ -30,18 +31,20 @@ class Form extends React.Component {
             data-testid="name-input"
           />
         </label>
-        <label htmlFor="description-input">
+        <label className="form-label fw-bold" htmlFor="description-input">
           Descrição:
           <textarea
+            className="form-control"
             name="cardDescription"
             value={ cardDescription }
             onChange={ onInputChange }
             data-testid="description-input"
           />
         </label>
-        <label htmlFor="attr1-input">
-          Atributo 1:
+        <label className="form-label fw-bold label-attr" htmlFor="attr1-input">
+          Attr01:
           <input
+            className="form-control"
             name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
@@ -49,9 +52,10 @@ class Form extends React.Component {
             data-testid="attr1-input"
           />
         </label>
-        <label htmlFor="attr2-input">
-          Atributo 2:
+        <label className="form-label fw-bold label-attr" htmlFor="attr2-input">
+          Attr02:
           <input
+            className="form-control"
             name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
@@ -59,9 +63,10 @@ class Form extends React.Component {
             data-testid="attr2-input"
           />
         </label>
-        <label htmlFor="attr3-input">
-          Atributo 3:
+        <label className="form-label fw-bold label-attr" htmlFor="attr3-input">
+          Attr03:
           <input
+            className="form-control"
             name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
@@ -69,9 +74,10 @@ class Form extends React.Component {
             data-testid="attr3-input"
           />
         </label>
-        <label htmlFor="image-input">
+        <label className="form-label fw-bold" htmlFor="image-input">
           Imagem:
           <input
+            className="form-control"
             name="cardImage"
             value={ cardImage }
             onChange={ onInputChange }
@@ -79,9 +85,10 @@ class Form extends React.Component {
             data-testid="image-input"
           />
         </label>
-        <label htmlFor="rare-input">
+        <label className="form-label fw-bold" htmlFor="rare-input">
           Rariadade
           <select
+            className="form-select"
             name="cardRare"
             value={ cardRare }
             onChange={ onInputChange }
@@ -92,23 +99,29 @@ class Form extends React.Component {
             <option value="muito raro">Muito Raro</option>
           </select>
         </label>
-        <label htmlFor="trunfo-input">
-          {!hasTrunfo
-            ? (
-              <div>
-                Super Trunnfo
+        {!hasTrunfo
+          ? (
+            <div>
+              <label
+                className="form-check-label fw-bold"
+                htmlFor="trunfo-input"
+              >
                 <input
+                  id="trunfo-input"
+                  className="form-check-input space-checkbox"
                   name="cardTrunfo"
                   checked={ cardTrunfo }
                   onChange={ onInputChange }
                   type="checkbox"
                   data-testid="trunfo-input"
                 />
-              </div>
-            )
-            : (<div>Você já tem um Super Trunfo em seu baralho</div>)}
-        </label>
+                Super Trunnfo
+              </label>
+            </div>
+          )
+          : (<div>Você já tem um Super Trunfo em seu baralho</div>)}
         <button
+          className="btn btn-success btn-lg"
           type="submit"
           disabled={ isSaveButtonDisabled }
           onClick={ onSaveButtonClick }

@@ -8,7 +8,7 @@ const stateInitial = {
   cardAttr1: '0',
   cardAttr2: '0',
   cardAttr3: '0',
-  cardImage: '',
+  cardImage: 'https://c.tenor.com/hHlUR7GrxZEAAAAd/kaiser-rpg.gif',
   cardRare: 'normal',
   cardTrunfo: false,
   cards: [],
@@ -45,7 +45,6 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo,
     } = this.state;
     const newCard = {
       cardName,
@@ -56,7 +55,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      hasTrunfo };
+    };
     cards.push(newCard);
     this.setState(stateInitial);
     this.setState({
@@ -87,12 +86,10 @@ class App extends React.Component {
     return true;
   }
 
-  deleteCard(cardN) {
+  deleteCard(cardName) {
     const { cards } = this.state;
-    const test = cards.find((card) => card.cardName === cardN);
-    if (test.cardTrunfo) {
-      this.setState({ hasTrunfo: false });
-    }
+    const test = cards.find((card) => card.cardName === cardName);
+    if (test.cardTrunfo) this.setState({ hasTrunfo: false });
     cards.splice(test, 1);
     this.setState({ cards });
   }
@@ -112,52 +109,63 @@ class App extends React.Component {
     } = this.state;
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ this.isSaveButtonDisabled() }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        {cards && cards.map((card) => (
-          <div key={ card.cardName }>
-            <Card
-              cardName={ card.cardName }
-              cardDescription={ card.cardDescription }
-              cardAttr1={ card.cardAttr1 }
-              cardAttr2={ card.cardAttr2 }
-              cardAttr3={ card.cardAttr3 }
-              cardImage={ card.cardImage }
-              cardRare={ card.cardRare }
-              cardTrunfo={ card.cardTrunfo }
+        <div className="container-cards">
+          <div className="create-cards">
+            <h1 className="title-form">Adicione uma nova carta</h1>
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ hasTrunfo }
+              isSaveButtonDisabled={ this.isSaveButtonDisabled() }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
             />
-            <button
-              type="button"
-              data-testid="delete-button"
-              onClick={ () => this.deleteCard(card.cardName) }
-            >
-              Excluir
-            </button>
           </div>
-        ))}
+          <div className="create-cards cards-left">
+            <h1 className="title-form">Pré-visualização</h1>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
+        </div>
+        <div className="contanier-cards-list">
+          {cards && cards.map((card) => (
+            <div key={ card.cardName } className="card cards-list">
+              <Card
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
+              />
+              <button
+                className="btn btn-danger btn-lg delete-button"
+                data-testid="delete-button"
+                onClick={ () => this.deleteCard(card.cardName) }
+                type="button"
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
+        </div>
+
       </div>
     );
   }
