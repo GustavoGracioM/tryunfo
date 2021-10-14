@@ -9,7 +9,7 @@ const stateInitial = {
   cardAttr2: '0',
   cardAttr3: '0',
   cardImage: '',
-  cardRare: 'normal',
+  cardRare: 'raro',
   cardTrunfo: false,
   cards: [],
   hasTrunfo: false,
@@ -43,7 +43,7 @@ class App extends React.Component {
       cardAttr2,
       cardAttr3,
       cardImage,
-      cardRareormal,
+      cardRare,
       cardTrunfo,
       hasTrunfo,
     } = this.state;
@@ -54,7 +54,7 @@ class App extends React.Component {
       cardAttr2,
       cardAttr3,
       cardImage,
-      cardRareormal,
+      cardRare,
       cardTrunfo,
       hasTrunfo };
     cards.push(newCard);
@@ -123,7 +123,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ this.isSaveButtonDisabled }
+          isSaveButtonDisabled={ this.isSaveButtonDisabled() }
           onInputChange={ this.onInputChange }
           onSaveButtonClick={ this.onSaveButtonClick }
         />
