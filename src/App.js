@@ -8,7 +8,7 @@ const stateInitial = {
   cardAttr1: '0',
   cardAttr2: '0',
   cardAttr3: '0',
-  cardImage: 'https://c.tenor.com/hHlUR7GrxZEAAAAd/kaiser-rpg.gif',
+  cardImage: '',
   cardRare: 'normal',
   cardTrunfo: false,
   cards: [],

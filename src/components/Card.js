@@ -41,7 +41,7 @@ class Card extends React.Component {
           <h3
             data-testid="rare-card"
           >
-            { cardRare[0].toUpperCase() + cardRare.substr(1) }
+            {cardRare}
           </h3>
           {cardTrunfo && (
             <h3
