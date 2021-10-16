@@ -35,8 +35,8 @@ class App extends React.Component {
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    let { cards } = this.state;
     const {
-      cards,
       cardName,
       cardDescription,
       cardAttr1,
@@ -56,7 +56,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
-    cards.push(newCard);
+    cards = [...cards, newCard];
     this.setState(stateInitial);
     this.setState({
       cards,
