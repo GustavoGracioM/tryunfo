@@ -13,6 +13,7 @@ const stateInitial = {
   cardTrunfo: false,
   cards: [],
   hasTrunfo: false,
+  cardNameFilter: '',
 };
 
 class App extends React.Component {
@@ -61,8 +62,9 @@ class App extends React.Component {
     this.setState({
       cards,
     });
-    const result = cards.some((card) => card.cardTrunfo === true);
+    const result = cards.find((card) => card.cardTrunfo === true);
     if (result) return this.setState({ hasTrunfo: true });
+    return this.setState({ hasTrunfo: false });
   }
 
   isSaveButtonDisabled() {
@@ -88,9 +90,9 @@ class App extends React.Component {
 
   deleteCard(cardName) {
     const { cards } = this.state;
-    const test = cards.find((card) => card.cardName === cardName);
-    if (test.cardTrunfo) this.setState({ hasTrunfo: false });
-    cards.splice(test, 1);
+    const cardSelected = cards.find((card) => card.cardName === cardName);
+    if (cardSelected.cardTrunfo) this.setState({ hasTrunfo: false });
+    cards.splice(cardSelected, 1);
     this.setState({ cards });
   }
 
@@ -106,6 +108,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       cards,
+      cardNameFilter,
     } = this.state;
     return (
       <div>
@@ -142,30 +145,48 @@ class App extends React.Component {
           </div>
         </div>
         <div className="contanier-cards-list">
-          {cards && cards.map((card) => (
-            <div key={ card.cardName } className="card cards-list">
-              <Card
-                cardName={ card.cardName }
-                cardDescription={ card.cardDescription }
-                cardAttr1={ card.cardAttr1 }
-                cardAttr2={ card.cardAttr2 }
-                cardAttr3={ card.cardAttr3 }
-                cardImage={ card.cardImage }
-                cardRare={ card.cardRare }
-                cardTrunfo={ card.cardTrunfo }
+          <div className="filter-inputs">
+            <h2>Todas as cartas</h2>
+            <label className="form-label fw-bold" htmlFor="name-input">
+              Nome da Carta
+              <input
+                className="form-control"
+                name="cardNameFilter"
+                value={ cardNameFilter }
+                onChange={ this.onInputChange }
+                type="text"
+                data-testid="name-filter"
               />
-              <button
-                className="btn btn-danger btn-lg delete-button"
-                data-testid="delete-button"
-                onClick={ () => this.deleteCard(card.cardName) }
-                type="button"
-              >
-                Excluir
-              </button>
-            </div>
-          ))}
+            </label>
+          </div>
+          <div className="cards-filter-list">
+            {cards && cards
+              .filter((a) => a.cardName.includes(cardNameFilter))
+              .map((card) => (
+                <div key={ card.cardName } className="card cards-list">
+                  <Card
+                    cardName={ card.cardName }
+                    cardDescription={ card.cardDescription }
+                    cardAttr1={ card.cardAttr1 }
+                    cardAttr2={ card.cardAttr2 }
+                    cardAttr3={ card.cardAttr3 }
+                    cardImage={ card.cardImage }
+                    cardRare={ card.cardRare }
+                    cardTrunfo={ card.cardTrunfo }
+                  />
+                  <button
+                    className="btn btn-danger btn-lg delete-button"
+                    data-testid="delete-button"
+                    onClick={ () => this.deleteCard(card.cardName) }
+                    type="button"
+                  >
+                    Excluir
+                    { console.log(card)}
+                  </button>
+                </div>
+              ))}
+          </div>
         </div>
-
       </div>
     );
   }

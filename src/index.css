@@ -148,6 +148,19 @@ label {
   justify-content: space-between;
 }
 
+.filter-inputs {
+  width: 30%;
+  padding: 6%;
+}
+
+.cards-filter-list {
+  width: 70%;
+  padding-top: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .delete-button {
   margin-left: 37%;
 }
