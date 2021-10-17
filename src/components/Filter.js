@@ -7,6 +7,7 @@ class Filter extends React.Component {
       cardNameFilter,
       cardRareFilter,
       onInputChange,
+      cardTrunfoFilter,
     } = this.props;
     return (
       <div className="filter-inputs">
@@ -37,6 +38,22 @@ class Filter extends React.Component {
             <option value="muito raro">Muito Raro</option>
           </select>
         </label>
+        <br />
+        <label
+          className="form-check-label fw-bold"
+          htmlFor="trunfo-filter-input"
+        >
+          <input
+            id="trunfo-filter-input"
+            className="form-check-input space-checkbox"
+            name="cardTrunfoFilter"
+            checked={ cardTrunfoFilter }
+            onChange={ onInputChange }
+            type="checkbox"
+            data-testid="trunfo-filter"
+          />
+          Super Trunfo
+        </label>
       </div>
     );
   }
@@ -45,6 +62,7 @@ class Filter extends React.Component {
 Filter.propTypes = {
   cardNameFilter: PropTypes.string.isRequired,
   cardRareFilter: PropTypes.string.isRequired,
+  cardTrunfoFilter: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
 
 };

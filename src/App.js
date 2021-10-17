@@ -16,6 +16,7 @@ const stateInitial = {
   hasTrunfo: false,
   cardNameFilter: '',
   cardRareFilter: 'todas',
+  cardTrunfoFilter: false,
 };
 
 class App extends React.Component {
@@ -112,6 +113,7 @@ class App extends React.Component {
       cards,
       cardNameFilter,
       cardRareFilter,
+      cardTrunfoFilter,
     } = this.state;
     return (
       <div>
@@ -151,6 +153,7 @@ class App extends React.Component {
           <Filter
             cardNameFilter={ cardNameFilter }
             cardNameRare={ cardRareFilter }
+            cardTrunfoFilter={ cardTrunfoFilter }
             onInputChange={ this.onInputChange }
           />
           <div className="cards-filter-list">
@@ -158,6 +161,7 @@ class App extends React.Component {
               .filter((a) => a.cardName.includes(cardNameFilter))
               .filter((b) => (
                 cardRareFilter === 'todas' ? b : b.cardRare === cardRareFilter))
+              .filter((c) => (c.cardTrunfo ? c : c.cardTrunfo === cardTrunfoFilter))
               .map((card) => (
                 <div key={ card.cardName } className="card cards-list">
                   <Card

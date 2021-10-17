@@ -115,7 +115,7 @@ class Form extends React.Component {
                   type="checkbox"
                   data-testid="trunfo-input"
                 />
-                Super Trunnfo
+                Super Trunfo
               </label>
             </div>
           )
