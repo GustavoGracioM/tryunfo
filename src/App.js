@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './components/Card';
+import Filter from './components/Filter';
 import Form from './components/Form';
 
 const stateInitial = {
@@ -14,6 +15,7 @@ const stateInitial = {
   cards: [],
   hasTrunfo: false,
   cardNameFilter: '',
+  cardRareFilter: 'todas',
 };
 
 class App extends React.Component {
@@ -109,6 +111,7 @@ class App extends React.Component {
       hasTrunfo,
       cards,
       cardNameFilter,
+      cardRareFilter,
     } = this.state;
     return (
       <div>
@@ -145,23 +148,16 @@ class App extends React.Component {
           </div>
         </div>
         <div className="contanier-cards-list">
-          <div className="filter-inputs">
-            <h2>Todas as cartas</h2>
-            <label className="form-label fw-bold" htmlFor="name-input">
-              Nome da Carta
-              <input
-                className="form-control"
-                name="cardNameFilter"
-                value={ cardNameFilter }
-                onChange={ this.onInputChange }
-                type="text"
-                data-testid="name-filter"
-              />
-            </label>
-          </div>
+          <Filter
+            cardNameFilter={ cardNameFilter }
+            cardNameRare={ cardRareFilter }
+            onInputChange={ this.onInputChange }
+          />
           <div className="cards-filter-list">
             {cards && cards
               .filter((a) => a.cardName.includes(cardNameFilter))
+              .filter((b) => (
+                cardRareFilter === 'todas' ? b : b.cardRare === cardRareFilter))
               .map((card) => (
                 <div key={ card.cardName } className="card cards-list">
                   <Card
@@ -181,7 +177,6 @@ class App extends React.Component {
                     type="button"
                   >
                     Excluir
-                    { console.log(card)}
                   </button>
                 </div>
               ))}
