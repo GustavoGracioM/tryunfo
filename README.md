@@ -2,7 +2,7 @@
 
 
 
-Projeto tryufo é do módulo de front-end do curso de desenvolvimenento web da <a href="https://www.betrybe.com/">Trybe</a>. Objetivo do projeto era desenvolver uma aplicação para criar um deck de super trunfo, tendo um templete para pre-visualização de criação da carta e uma lista com filtro listando todas as cartas criadas.
+Projeto tryufo é do módulo de front-end do curso de desenvolvimenento web da <a href="https://www.betrybe.com/">Trybe</a>. Objetivo do projeto era desenvolver uma aplicação para criar um deck do jogo super trunfo, tendo um templete para pre-visualização da criação da carta e uma lista com filtro listando todas as cartas criadas.
 
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![image](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
