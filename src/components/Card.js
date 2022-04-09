@@ -25,17 +25,18 @@ class Card extends React.Component {
         </h4>
         <div className="attrs">
           <p data-testid="attr1-card fw-bold">
-            Attr01...............................
+            Attr01 ............................
             <span className="attr-color">{ cardAttr1 }</span>
           </p>
           <p data-testid="attr2-card fw-bold">
-            Attr02...............................
+            Attr02 ............................
             <span className="attr-color">{ cardAttr2 }</span>
           </p>
           <p data-testid="attr3-card fw-bold">
-            Attr03...............................
+            Attr03 ............................
             <span className="attr-color">{ cardAttr3 }</span>
           </p>
+
         </div>
         <div className="card-rare">
           <h3

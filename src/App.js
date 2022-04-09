@@ -2,14 +2,15 @@ import React from 'react';
 import Card from './components/Card';
 import Filter from './components/Filter';
 import Form from './components/Form';
+import { addCards, removeCard, readCards } from './services/localStorgeFunc';
 
 const stateInitial = {
-  cardName: '',
+  cardName: ' ',
   cardDescription: '',
   cardAttr1: '0',
   cardAttr2: '0',
   cardAttr3: '0',
-  cardImage: '',
+  cardImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkAClNVzyevqgrlXi47-d83yW-sZVQMhALDw&usqp=CAU',
   cardRare: 'normal',
   cardTrunfo: false,
   cards: [],
@@ -25,8 +26,12 @@ class App extends React.Component {
     this.state = stateInitial;
     this.onInputChange = this.onInputChange.bind(this);
     this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
-    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-    this.deleteCard = this.deleteCard.bind(this);
+    this.saveInLocalStorege = this.saveInLocalStorege.bind(this);
+    this.loadingCards = this.loadingCards.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadingCards();
   }
 
   onInputChange({ target }) {
@@ -37,9 +42,12 @@ class App extends React.Component {
     });
   }
 
-  onSaveButtonClick(event) {
+  loadingCards() {
+    this.setState({ cards: readCards() });
+  }
+
+  saveInLocalStorege(event) {
     event.preventDefault();
-    let { cards } = this.state;
     const {
       cardName,
       cardDescription,
@@ -50,7 +58,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     } = this.state;
-    const newCard = {
+    const card = {
       cardName,
       cardDescription,
       cardAttr1,
@@ -60,14 +68,19 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
-    cards = [...cards, newCard];
-    this.setState(stateInitial);
-    this.setState({
-      cards,
-    });
-    const result = cards.find((card) => card.cardTrunfo === true);
-    if (result) return this.setState({ hasTrunfo: true });
-    return this.setState({ hasTrunfo: false });
+    addCards(card);
+    const cards = readCards();
+    const x = cards.find((c) => c.cardTrunfo === true);
+    const newCard = { ...stateInitial, hasTrunfo: x };
+    this.setState(newCard, () => this.loadingCards());
+  }
+
+  removeCardLocalStorege(card) {
+    removeCard(card);
+    this.loadingCards();
+    const cards = readCards();
+    const x = cards.find((c) => c.cardTrunfo === true);
+    this.setState({ hasTrunfo: x });
   }
 
   isSaveButtonDisabled() {
@@ -89,14 +102,6 @@ class App extends React.Component {
     const result1 = att.every((num) => num <= maxValue && num >= 0 && sum <= valueTotal);
     if (!result && result1) return false;
     return true;
-  }
-
-  deleteCard(cardName) {
-    const { cards } = this.state;
-    const cardSelected = cards.find((card) => card.cardName === cardName);
-    if (cardSelected.cardTrunfo) this.setState({ hasTrunfo: false });
-    cards.splice(cardSelected, 1);
-    this.setState({ cards });
   }
 
   render() {
@@ -132,7 +137,7 @@ class App extends React.Component {
               hasTrunfo={ hasTrunfo }
               isSaveButtonDisabled={ this.isSaveButtonDisabled() }
               onInputChange={ this.onInputChange }
-              onSaveButtonClick={ this.onSaveButtonClick }
+              onSaveButtonClick={ this.saveInLocalStorege }
             />
           </div>
           <div className="create-cards cards-left">
@@ -177,7 +182,7 @@ class App extends React.Component {
                   <button
                     className="btn btn-danger btn-lg delete-button"
                     data-testid="delete-button"
-                    onClick={ () => this.deleteCard(card.cardName) }
+                    onClick={ () => this.removeCardLocalStorege(card) }
                     type="button"
                   >
                     Excluir

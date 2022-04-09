@@ -61,7 +61,7 @@ label {
 }
 
 .description-card {
-  font-size: 10px;
+  font-size: 20px;
   margin-top: 15px;
   margin-bottom: 10px;
 }
@@ -155,13 +155,19 @@ label {
 }
 
 .cards-filter-list {
-  width: 70%;
-  padding-top: 15%;
+  margin: 70px;
+  width:  1000px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items:initial;
 }
 
 .delete-button {
   margin-left: 37%;
+}
+
+.attr-points {
+  font-size: 18px;
+  margin-top: 20px;
 }

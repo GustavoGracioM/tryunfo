@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const limitAtttr = 210;
+
 class Form extends React.Component {
   render() {
     const {
@@ -73,7 +75,13 @@ class Form extends React.Component {
             type="number"
             data-testid="attr3-input"
           />
+
         </label>
+        <p className="fw-bold attr-points ">
+          Pontos Restantes
+          {' '}
+          {limitAtttr - cardAttr1 - cardAttr2 - cardAttr3}
+        </p>
         <label className="form-label fw-bold" htmlFor="image-input">
           Imagem:
           <input
